@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using AutoMapper;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vidly_RESTful_API.Contexts;
+using Vidly_RESTful_API.Services;
+using Vidly_RESTful_API.Validators.Customer;
 
 namespace Vidly_RESTful_API
 {
@@ -23,7 +29,20 @@ namespace Vidly_RESTful_API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddMvc();
+            services.AddScoped<IVidlyRepository, VidlyRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddAutoMapper(typeof(Program).GetTypeInfo().Assembly);
+
+            services.AddMvc()
+                .AddFluentValidation(fv =>
+                    fv.RegisterValidatorsFromAssemblyContaining<CustomerForCreationDtoValidator>());
+
+            services.Configure<ApiBehaviorOptions>(o =>
+            {
+                o.InvalidModelStateResponseFactory = opt => new UnprocessableEntityObjectResult(opt.ModelState);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

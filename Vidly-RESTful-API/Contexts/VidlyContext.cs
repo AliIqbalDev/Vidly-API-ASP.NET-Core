@@ -8,6 +8,8 @@ namespace Vidly_RESTful_API.Contexts
 {
     public class VidlyContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Customer> Customers { get; set; }
+
         public VidlyContext(DbContextOptions options)
             :base(options)
         {
@@ -24,6 +26,7 @@ namespace Vidly_RESTful_API.Contexts
             builder.Entity<IdentityUserToken<string>>().ToTable("IdentityUserTokens");
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new CustomerConfiguration());
         }
     }
 }
