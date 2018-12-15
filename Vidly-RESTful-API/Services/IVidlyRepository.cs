@@ -13,5 +13,13 @@ namespace Vidly_RESTful_API.Services
         Task<Customer> GetCustomerAsync(int customerId);
 
         void DeleteCustomer(Customer customer);
+
+        void AddGenre(Genre genre);
+
+        Task<IEnumerable<Genre>> GetGenresAsync();
+
+        Task<Genre> GetGenreAsync(int genreId);
+
+        void DeleteGenre(Genre genre);
     }
 }

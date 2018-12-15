@@ -10,6 +10,8 @@ namespace Vidly_RESTful_API.Contexts
     {
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Genre> Genres { get; set; }
+
         public VidlyContext(DbContextOptions options)
             :base(options)
         {
@@ -27,6 +29,7 @@ namespace Vidly_RESTful_API.Contexts
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new CustomerConfiguration());
+            builder.ApplyConfiguration(new GenreConfiguration());
         }
     }
 }
