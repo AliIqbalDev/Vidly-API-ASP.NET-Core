@@ -54,5 +54,25 @@ namespace Vidly_RESTful_API.Services
         {
             _context.Genres.Remove(genre);
         }
+
+        public void AddMovie(Movie movie)
+        {
+            _context.Movies.Add(movie);
+        }
+
+        public async Task<IEnumerable<Movie>> GetMoviesAsync()
+        {
+            return await _context.Movies.ToListAsync();
+        }
+
+        public async Task<Movie> GetMovieAsync(int movieId)
+        {
+            return await _context.Movies.FirstOrDefaultAsync(m => m.Id == movieId);
+        }
+
+        public void DeleteMovie(Movie movie)
+        {
+            _context.Movies.Remove(movie);
+        }
     }
 }

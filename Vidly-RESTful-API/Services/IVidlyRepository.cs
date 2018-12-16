@@ -21,5 +21,13 @@ namespace Vidly_RESTful_API.Services
         Task<Genre> GetGenreAsync(int genreId);
 
         void DeleteGenre(Genre genre);
+
+        void AddMovie(Movie movie);
+
+        Task<IEnumerable<Movie>> GetMoviesAsync();
+
+        Task<Movie> GetMovieAsync(int movieId);
+
+        void DeleteMovie(Movie movie);
     }
 }
