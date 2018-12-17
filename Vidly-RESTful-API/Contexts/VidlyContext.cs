@@ -14,6 +14,8 @@ namespace Vidly_RESTful_API.Contexts
 
         public DbSet<Movie> Movies { get; set; }
 
+        public DbSet<Rental> Rentals { get; set; }
+
         public VidlyContext(DbContextOptions options)
             :base(options)
         {
@@ -33,6 +35,7 @@ namespace Vidly_RESTful_API.Contexts
             builder.ApplyConfiguration(new CustomerConfiguration());
             builder.ApplyConfiguration(new GenreConfiguration());
             builder.ApplyConfiguration(new MovieConfiguration());
+            builder.ApplyConfiguration(new RentalConfiguration());
         }
     }
 }

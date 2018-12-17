@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Vidly_RESTful_API.Dtos;
 using Vidly_RESTful_API.Models;
 
@@ -12,6 +13,7 @@ namespace Vidly_RESTful_API.Mapping
             CreateMap<Customer, CustomerDto>();
             CreateMap<Genre, GenreDto>();
             CreateMap<Movie, MovieDto>();
+            CreateMap<Rental, RentalDto>();
 
             // API Resource to Domain
             CreateMap<CustomerForCreationDto, Customer>();
@@ -20,6 +22,9 @@ namespace Vidly_RESTful_API.Mapping
             CreateMap<GenreForUpdateDto, Genre>();
             CreateMap<MovieForCreationDto, Movie>();
             CreateMap<MovieForUpdateDto, Movie>();
+            CreateMap<RentalForCreationDto, Rental>()
+                .ForMember(r => r.DateOut,
+                    opt => opt.MapFrom(rDto => DateTime.Now));
         }
     }
 }
