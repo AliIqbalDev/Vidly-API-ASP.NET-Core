@@ -12,7 +12,9 @@ namespace Vidly_RESTful_API.Mapping
             // Domain to API Resource
             CreateMap<Customer, CustomerDto>();
             CreateMap<Genre, GenreDto>();
-            CreateMap<Movie, MovieDto>();
+            CreateMap<Movie, MovieDto>()
+                .ForMember(mDto => mDto.Genre,
+                    opt => opt.MapFrom(m => new GenreDto {Id = m.Genre.Id, Name = m.Genre.Name}));
             CreateMap<Rental, RentalDto>();
 
             // API Resource to Domain

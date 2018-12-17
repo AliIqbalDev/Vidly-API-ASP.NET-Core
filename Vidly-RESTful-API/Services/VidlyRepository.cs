@@ -62,12 +62,12 @@ namespace Vidly_RESTful_API.Services
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync()
         {
-            return await _context.Movies.ToListAsync();
+            return await _context.Movies.Include(m => m.Genre).ToListAsync();
         }
 
         public async Task<Movie> GetMovieAsync(int movieId)
         {
-            return await _context.Movies.FirstOrDefaultAsync(m => m.Id == movieId);
+            return await _context.Movies.Include(m => m.Genre).FirstOrDefaultAsync(m => m.Id == movieId);
         }
 
         public void DeleteMovie(Movie movie)
